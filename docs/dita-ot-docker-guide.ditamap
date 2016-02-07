@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+ <title>DITA Community Open Toolkit Docker Container Guide</title>
+  <topicmeta>
+    <critdates>
+      <created date="2016-02-06"/>
+    </critdates>
+  </topicmeta>
+  <topicgroup>
+    <topicmeta>
+      <navtitle>Key Definitions</navtitle>
+    </topicmeta>
+    <keydef href="https://github.com/dita4publishers/d4p-ot-docker"
+      keys="website-d4p-dita-ot-docker" scope="external" format="html">
+      <topicmeta>
+        <navtitle>https://github.com/dita4publishers/d4p-ot-docker</navtitle>
+      </topicmeta>
+    </keydef>
+    <keydef keys="website-dfst-github-organization" format="html" scope="external"
+      href="http://github.com/dita-for-small-teams"/>
+    <keydef href="https://github.com/dita-for-small-teams/dfst-docker"
+      keys="website-dfst-github-dfst-docker-project" scope="external" format="html">
+      <topicmeta>
+        <navtitle>https://github.com/dita-for-small-teams/dfst-docker</navtitle>
+      </topicmeta>
+    </keydef>
+    <keydef href="https://github.com/dita-community/dita-community-ot-docker"
+      keys="website-dita-community-dita-ot-docker" format="html" scope="external">
+      <topicmeta>
+        <navtitle>https://github.com/dita-community/dita-community-ot-docker</navtitle>
+      </topicmeta>
+    </keydef>
+    <keydef href="https://docker.com" keys="website-docker" scope="external" format="html">
+      <topicmeta>
+        <navtitle>http://docker.com</navtitle>
+      </topicmeta>
+    </keydef>
+    <keydef href="https://docs.docker.com" keys="website-docker-docs" scope="external" format="html">
+      <topicmeta>
+        <navtitle>https://docs.docker.com</navtitle>
+      </topicmeta>
+    </keydef>
+    <keydef href="https://hub.docker.com" keys="website-docker-hub" format="html" scope="external">
+      <topicmeta>
+        <navtitle>Docker Hub Web site</navtitle>
+      </topicmeta>
+    </keydef>
+    <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox" format="html"
+      scope="external"/>
+    <keydef href="http://doc.gitlab.com/omnibus/docker/"
+      keys="website-gitlab-container-documentation" format="html" scope="external"/>
+    <keydef href="https://www.virtualbox.org" keys="website-virtualbox" scope="external"
+      format="html"/>
+    <keydef href="https://www.virtualbox.org/wiki/Documentation" keys="website-virtualbox-docs"
+      scope="external" format="html"/>
+    <keydef href="http://yaml.org" keys="website-yaml-org" format="html" scope="external">
+      <topicmeta>
+        <navtitle>http://yaml.org</navtitle>
+      </topicmeta>
+    </keydef>
+  </topicgroup>
+  <topicref href="topics/dita-ot-docker-guide.dita" keys="dita-ot-docker-container-guide">
+    <topicref href="topics/about_docker.dita"/>
+  </topicref>
+</map>

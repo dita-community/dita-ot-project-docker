@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="about_docker">
+ <title>About Docker</title>
+ <shortdesc>The Docker system makes it easy to package and run software on any platform.</shortdesc>
+ <conbody>
+  <p>The Docker technology lets you package software components or files into modular
+        <term>containers</term> that can be run on any platform. Each container is a Linux virtual
+      machine. Docker is free open source. The main Docker Web site is  <xref
+        keyref="website-docker"/>.</p>
+    <p>The Docker platform manages getting, maintaining, and running Docker containers on a host
+      machine. When the host machine is itself a Linux machine the Docker containers can be run
+      directly by the host operating system. When the host machine is Windows or OS X the containers
+      are run by another virtual machine, which serves as the Linux machine that then runs the
+      containers. This approach allows the same container to be run on any operating system but adds
+      a little complexity for Windows and Mac users. But it still makes an easy way to deploy and
+      use software that would otherwise be tedious, difficult, or impossible to run directly under
+      Windows or OS X.</p>
+    <p>The Docker platform includes a public container library, the <xref
+        keyref="website-docker-hub">Docker Hub</xref>, which any one can use to make their
+      containers available. When you attempt to run a container for the first time, Docker will
+      automatically try to get it from the Docker Hub for you. This makes deploying and updating
+      software about as easy as it can be. </p>
+    <p>Docker containers can be tagged, usually to reflect specific release versions. In the case of
+      the DITA Open Toolkit containers, the tags are used to reflect the DITA Open Toolkit version
+      used in the container. By default, Docker will look for a container with the tag "latest" but
+      you can specify a tag when running or getting a container. For example, to use the 1.8.5 Open
+      Toolkit you would specify the tag "1.8.5" as part of the <cmdname>docker run</cmdname>
+      command:<codeblock>$ docker run -it ditaot/dita-ot:1.8.5</codeblock></p>
+ </conbody>
+</concept>
