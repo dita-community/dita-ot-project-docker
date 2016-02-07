@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
 <map>
- <title>DITA Community Open Toolkit Docker Container Guide</title>
+ <title>DITA Open Toolkit Docker Container Guide</title>
   <topicmeta>
     <critdates>
       <created date="2016-02-06"/>
+      <revised modified="2016-02-07"/>
     </critdates>
   </topicmeta>
   <topicgroup>
