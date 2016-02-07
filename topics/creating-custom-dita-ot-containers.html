@@ -1,0 +1,121 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Creating Your Own DITA Open Toolkit Containers</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="schema.DC" href="http://purl.org/dc/terms/"><meta name="DC.Type" content="concept"><meta name="description" content="You can easily configure your own DITA Open Toolkit containers using the ditaot/dita-ot-base container as a starting point."><meta name="DC.Format" content="XHTML"><meta name="DC.Identifier" content="untitled5"><script type="text/javascript">var d4p = {"relativePath":"..\/","dev":false,"debug":false,"draft":false,"nextTopicHref":"","previousTopicHref":"topics\/running_the_open_toolkit.html","ext":".html","root":false,"topic":{"chunked":""},"map":{"title":"DITA Community Open Toolkit Docker Container Guide","chunked":false},"search":{"minlength":2},"l":{"searchPageHeading":"Search Results","close":"Close"}}</script><link rel="stylesheet" type="text/css" media="screen, projection" href="../themes/dita-d4p-classic/css/style.css"><link rel="stylesheet" type="text/css" media="screen, projection, print" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><script type="text/javascript">
+      
+        d4p.cssGridPath = d4p.dev ? 'html5-themes/modules/960-Responsive-Grid/css/' : 'themes/dita-d4p-classic/css/';
+        var ADAPT_CONFIG = {
+          // Where is your CSS?
+          path: d4p.relativePath + d4p.cssGridPath,
+          
+          // false = Only run once, when page first loads.
+          // true = Change on window resize and page tilt.
+          dynamic: true,
+          
+          // Optional callback... myCallback(i, width)
+          callback: doc_resize,
+          
+          // First range entry is the minimum.
+          // Last range entry is the maximum.
+          // Separate ranges by "to" keyword.
+          range: [
+             // small (size-0)
+            '0px    to 760px  = mobile.css',
+             // medium (size-1, size-2)
+            '760px  to 980px  = 720.css',
+            '980px  to 1270px = 960.css',
+             // large (size-3, size-5)
+            '1270px to 1600px = 1200.css',
+            '1600px to 1940px = 1560.css',
+             // extra large (size-6)
+            '1940px to 2540px = 1920.css',
+            '2540px           = 2520.css'
+          ]
+        };
+
+        function doc_resize(i, width)
+        {
+          d4p.setBodyClassfunction(i, width);
+        }
+
+
+        
+      </script><script type="text/javascript" src="../themes/dita-d4p-classic/js/script.js"></script></head><body class="en-us dita-d4p-classic centered navigation-default"><div id="d4h5-main-container" class="container_12" role="application"><header role="banner" aria-labelledby="publication-title" class="hide-for-small"><div class="grid_8"><h1 id="publication-title">DITA Community Open Toolkit Docker Container Guide</h1></div><section class="grid_4 search-box"><form id="search" role="search"><div class="form-group"><input id="search-text" type="text" autocomplete="off" class="form-control" placeholder="Search"></div></form></section><secion class="clearfix"></secion></header><div id="d4h5-section-container" class="grid_12"><nav id="local-navigation" class="grid_4 alpha omega" role="navigation" aria-label="Main navigation"><div id="nav-content"><ul><li><a href="../index.html">Table of Contents</a></li><li class="collapsible active"><a href="dita-ot-docker-guide.html">DITA Open Toolkit Docker Container Guide</a><ul><li><a href="about_docker.html">About Docker</a></li><li><a href="running_the_open_toolkit.html">Running The Open Toolkit</a></li><li class=" active"><a href="creating-custom-dita-ot-containers.html" class=" selected">Creating Your Own DITA Open Toolkit Containers</a></li></ul></li></ul></div></nav><div id="d4h5-main-content" class="grid_8 alpha omega"><article><nav id="content-toolbar" class="toolbar hide-for-small"></nav><section id="page"><div><a id="untitled5" class="anchor"></a> <h1 class="title topictitle1">Creating Your Own DITA Open Toolkit Containers</h1> <div class="body conbody"><p class="shortdesc">You can easily configure your own DITA Open Toolkit containers using the ditaot/dita-ot-base container as a starting point.</p> <p class="p">The ditaot/dita-ot container is suitable for direct use in running the Open Toolkit but, because it exposes the DITA-OT directory as a volume, is not usable as the base container for new Open Toolkit containers. This is because once you declare a directory as a volume in a Docker file, any subsequent changes to that directory made by the Docker file will not be persisted in the final image.</p> <p class="p">The ditaot/dita-ot-base container is designed to be used as the base for new DITA OT containers by not defining the DITA-OT volume. The base Dockerfile is available on GitHub in the <a data-keyref="website-dita-community-dita-ot-docker" class="xref external" href="https://github.com/dita-community/dita-community-ot-docker">https://github.com/dita-community/dita-community-ot-docker</a> project as <span class="ph filepath">dita-ot-base/Dockerfile</span>.</p> <div class="p">You set up your own working container using a Dockerfile like this:<pre class="pre codeblock">FROM ditaot/dita-ot-base
+MAINTAINER Me Myself "me@example.com"
+#
+# My custom DITA Open Toolkit
+#
+#
+# Add your additional stuff here
+#
+VOLUME /opt/dita-ot/DITA-OT
+CMD /bin/bash
+#
+# End of Dockerfile
+#</pre></div> <p class="p">The <samp class="ph codeph">FROM</samp> statement is required and must be the first statement in the file. The <samp class="ph codeph">MAINTAINER</samp> statement is documentation.</p> <p class="p">The <samp class="ph codeph">VOLUME</samp> statement makes the <span class="ph filepath">/opt/dita-ot/DITA-OT</span> directory in the container available to other containers that use this container's volumes. It should always be <span class="ph filepath">/opt/dita-ot/DITA-OT</span> so you can use your own container in place of the base DITA OT container without affecting any containers that use the OT from a container.</p> <div class="p">There are basically two ways to add your custom plugins to the container:<ul class="ul" id="untitled5__ul_pp4_1gq_x5"> <li class="li">Get a Zip file from the Web using <span class="keyword cmdname">wget</span> or <span class="keyword cmdname">curl</span> via the Dockerfile <span class="keyword cmdname">RUN</span> statement. For example, if your plugins are in a GitHub repository you can get the plugin as a Zip file using an HTTP URL.</li> <li class="li">Copy files from the host machine into the container using the Dockerfile <span class="keyword cmdname">ADD</span> statement.</li> </ul></div> <p class="p">To get a Zip file use <span class="keyword cmdname">wget</span> like so:</p> <pre class="pre codeblock">FROM ditaot/dita-ot-base
+MAINTAINER Me Myself "me@example.com"
+#
+# My custom DITA Open Toolkit
+#
+WORKDIR ${DITA_HOME}
+ENV DITA_COMM_URL=https://github.com/dita-community/ BRANCH=develop
+#
+# Get plugin from DITA Community project:
+RUN wget ${DITA_COMM_URL}org.dita-community.common.xslt/archive/${BRANCH}.zip &amp;&amp; \
+  unzip ${BRANCH}.zip -d plugins &amp;&amp; 
+  rm ${BRANCH}.zip
+#
+# Integrate new plugins
+#
+RUN ant -f integrator.xml
+#
+VOLUME /opt/dita-ot/DITA-OT
+CMD /bin/bash
+#
+# End of Dockerfile
+#</pre> <p class="p">The <span class="keyword cmdname">WORKDIR</span> statement sets the current working directory to the DITA-OT directory. You can refer to environment variables set in the base container's Dockerfile.</p> <p class="p">The <span class="keyword cmdname">ENV</span> statement defines two new environment variables that make it easier to construct the <span class="keyword cmdname">wget</span> commands that follow. For the DITA Community project, the latest code is normally on the develop branch.</p> <p class="p">The <span class="keyword cmdname">RUN wget</span> statement runs a Linux command. In this case the command is actually three commands, <span class="keyword cmdname">wget</span>, <span class="keyword cmdname">unzip</span>, and <span class="keyword cmdname">rm</span>, connected by "&amp;&amp;" (boolean and) operators. This is normal Linux shell script syntax. It means "do the first command and, if it succeeds, perform the next command, and then the next.</p> <p class="p">Stringing commands together like this is best Docker practice as it avoids creating unnecessary layers in the container and avoids some issues with caching.</p> <p class="p">The <span class="keyword cmdname">RUN ant</span> statement runs the normal Open Toolkit integrator script to integrate the new plugins.</p> <p class="p">The <span class="keyword cmdname">VOLUME</span> statement publishes the <span class="ph filepath">DITA-OT</span> directory as a volume, making it available to other containers. This statement must follow the commands that add things to the <span class="ph filepath">DITA-OT</span> directory.</p> <p class="p">The <span class="keyword cmdname">CMD</span> statement defines the default command to run when the container is started, in this case a bash shell. If you run the container without the <span class="keyword parmname">-it</span> parameters the shell will run and then immediately exit. If you specify the <span class="keyword parmname">-it</span> parameters to the <span class="keyword cmdname">docker run</span> command then you will end up in a bash terminal window inside the container. If you specify a command as a paremeter to the <span class="keyword cmdname">docker run</span> command then it is run in place of the command defined on the <span class="keyword cmdname">CMD</span> statement.</p> <p class="p">It should be clear that you can quickly copy and paste the <span class="keyword cmdname">RUN wget</span> lines to add whatever HTTP-accessible plugins you want.</p> <p class="p">Note also that using the 2.x version of the Open Toolkit you could use the <span class="keyword cmdname">dita --install</span> command to directly install plugins from Zip files via HTTP URL. However, if you need your container to work with both the 1.x and 2.x Open Toolkit versions you need to use the <span class="keyword cmdname">wget</span> plus <span class="ph filepath">integrator.xml</span> approach.</p> <p class="p">To use plugins that are on your local machine you can use the the Dockerfile <span class="keyword cmdname">ADD</span> statement, which copies files from the host machine into the container. The main requirement is that the files to be added must be in or under the directory that contains the <span class="ph filepath">Dockerfile</span> file:</p> <pre class="pre codeblock">FROM ditaot/dita-ot-base
+MAINTAINER Me Myself "me@example.com"
+#
+# My custom DITA Open Toolkit
+#
+WORKDIR ${DITA_HOME}
+ENV DITA_COMM_URL=https://github.com/dita-community/ BRANCH=develop
+#
+# Get plugin from DITA Community project:
+ADD plugins/org.example.myhtml/ .
+#
+# Integrate new plugins
+#
+RUN ant -f integrator.xml
+#
+VOLUME /opt/dita-ot/DITA-OT
+CMD /bin/bash
+#
+# End of Dockerfile
+#</pre> <div class="p">To build the container you use the <span class="keyword cmdname">docker build</span> command from the directory that contains the <span class="ph filepath">Dockerfile</span> file:<pre class="pre codeblock">$ cd /workspace/mycontainer/dita-ot
+$ ls
+Dockerfile
+plugins/
+$ <strong class="ph b">docker build .</strong>
+… {lots of messages} ...
+Removing intermediate container 5185b8770fc4
+Successfully built 3df126334196
+$ _</pre></div> <div class="p">If you don't specify an image name with the <span class="keyword cmdname">-t</span> parameter then the build command will assign a numeric image ID . You can run the container by specifying the numeric ID:<pre class="pre codeblock">$ docker run -it 3df126334196
+root@a90236ed0684:~/DITA-OT# _</pre></div> <div class="p">You can get a list of all the images in your environment using the <span class="keyword cmdname">docker images</span> command:<pre class="pre codeblock">$ docker images
+docker images
+REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
+&lt;none&gt;                              &lt;none&gt;              3df126334196        2 minutes ago       778.7 MB
+… {potentially long list of images}
+$ _</pre></div> <p class="p">You can remove images using the <span class="keyword cmdname">docker rmi</span> command:</p> <pre class="pre codeblock">$ docker rmi -f 3df126334196
+Deleted: sha256:3df1263341965178e0b43215fb2087c42ae7c815f4f636810531a7660055bb53
+Deleted: sha256:fb433121937830f727d2218af86bca050af86ea7e21b713cfb4b1abea060e1a1
+$ _</pre> <p class="p">The <span class="keyword parmname">-f</span> (force) parameter forces removal of the image. If you don't force the removal you have to first rm the container image, which will be stopped if you ran it before.</p> <div class="p">You can use the <span class="keyword parmname">--rm</span> parameter of the <span class="keyword cmdname">docker run</span> command to have the image automatically remove itself after it runs:<pre class="pre codeblock">docker run --rm -it 3df126334196
+root@a90236ed0684:~/DITA-OT# _</pre></div> <div class="p">To give the image a name, use the <span class="keyword parmname">-t</span> (tag) parameter of the <span class="keyword cmdname">docker build</span> command:<pre class="pre codeblock">$ docker build -t me/dita-ot .
+… {lots of messages, but fewer than before 
+  if there was no change to the Dockerfile}...
+$ docker images
+docker images
+REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
+me/dita-ot                          latest              1e5c40fd12af        24 seconds ago      778.7 MB
+...
+$ _</pre></div> <div class="p">Now you can run the image using the tag rather than the image ID:<pre class="pre codeblock">$ docker run --rm -it me/dita-ot
+root@8b64266207fd:~/DITA-OT# </pre></div> </div> <footer id="topicsNPLinks"><div id="footer_previous"><a href="../topics/running_the_open_toolkit.html" class="previous" rel="internal">Running The Open Toolkit</a></div><div id="footer_next"></div></footer></div></section></article><div class="clear"></div></div><div class="clearfix"></div></div><div class="clearfix"></div><div id="footer-container" class="grid_12"></div></div></body></html>
