@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="running_the_open_toolkit">
+ <title>Running The Open Toolkit</title>
+ <shortdesc>You can use a DITA Open Toolkit Docker container from the command line just like the
+    normal Open Toolkit.</shortdesc>
+ <conbody>
+  <p>To run the Open Toolkit container you need to connect the directory containing the DITA source
+      to be processed to the container and then specify the command-line parameters to the Open
+      Toolkit's <cmdname>dita</cmdname> command (OT 2.x) or <cmdname>ant</cmdname> command (OT 2.x
+      or 1.x). When you run the container you are simply running the normal Open Toolkit inside the
+      container's Linux environment. All you need to know is how to specify the location of the
+      input files.</p>
+    <p>By default, the Docker machine automatically shares the <filepath>/Users</filepath> directory
+      from the host machine with the Docker machine. This means your home directory is always
+      available as at least a read-only file system. You can write files to the Docker machine's
+      internal file system and they will persist until the Docker machine is killed or restarted. If
+      necessary you can secure shell to the Docker machine and copy files from the machine's
+      internal file system to your shared home directory.</p>
+    <p>You connect host directories to container volumes using the <parmname>-v</parmname> parameter
+      to the <cmdname>docker run</cmdname>
+      command:<codeblock>$ docker run -v /Users/ekimber/workspace:/opt/dita-ot/data ditaot/dita-ot \
+  dita -i /opt/dita-ot/data/pub-01/pub-01.ditamap \
+  -f html5 \
+  -o /opt/data-ot/data/pub-01/out/html5</codeblock></p>
+    <p>Under Windows you use <filepath>/c/Users/...</filepath> (assuming your Users directory is on
+      the <filepath>c:</filepath>
+      drive:<codeblock>$ docker run -v <b>/c/Users</b>/ekimber/workspace:/opt/dita-ot/data ditaot/dita-ot \
+  dita -i /opt/dita-ot/data/pub-01/pub-01.ditamap  \
+  -o /opt/dita-ot/data/pub-01/out/html5 -f html5</codeblock></p>
+    <p>After running the commands the output will be in the
+        <filepath>/Users/ekimber/workspace/pub-01/out/html5</filepath> directory.</p>
+    <p>By default the <cmdname>dita</cmdname> command does not produce any messages. If you want to
+      see the messages add the <parmname>-v</parmname> parameter to the <cmdname>dita</cmdname>
+      command. If you want to capture the log use the <parmname>-l</parmname> parameter and specify
+      the log
+      file:<codeblock>docker run -v <b>/c/Users</b>/ekimber/workspace:/opt/dita-ot/data ditaot/dita-ot \
+  dita -i /opt/dita-ot/data/pub-01/pub-01.ditamap  \
+  -o /opt/dita-ot/data/pub-01/out/html5 -f html5 \
+  -l /opt/dita-ot/data/pub-01/logs/html5.log</codeblock></p>
+ </conbody>
+</concept>

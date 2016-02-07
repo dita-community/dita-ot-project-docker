@@ -8,6 +8,10 @@
         <term>containers</term> that can be run on any platform. Each container is a Linux virtual
       machine. Docker is free open source. The main Docker Web site is  <xref
         keyref="website-docker"/>.</p>
+    <p>Docker is fundamentally a Linux-based technology, so even if you are using Docker on Windows
+      or OS X you will need to be familiar with a few basic Linux commands and be comfortable using
+      a command-line shell. You can even use ready-made Docker containers that provide full
+      graphical Unix environments like Ubuntu, accessible through VNC if you want.</p>
     <p>The Docker platform manages getting, maintaining, and running Docker containers on a host
       machine. When the host machine is itself a Linux machine the Docker containers can be run
       directly by the host operating system. When the host machine is Windows or OS X the containers
@@ -16,6 +20,13 @@
       a little complexity for Windows and Mac users. But it still makes an easy way to deploy and
       use software that would otherwise be tedious, difficult, or impossible to run directly under
       Windows or OS X.</p>
+    <p>The virtual machine that then runs the Docker containers is referred to as the <term>Docker
+        machine</term>. The default Docker machine uses Oracle's open-source VirtualBox but you can
+      use other virtual machine implementations, such as VMWare. On Windows and OS X you may need to
+      interact directly with the Docker machine in order to access the output of  Open Toolkit
+      processes due to complexities with how file permissions work. Docker machines have names, with
+      the name of the default Docker machine being "default". You can get a secure shell for the
+      Docker machine using the command <codeph>docker-machine ssh default</codeph>.</p>
     <p>The Docker platform includes a public container library, the <xref
         keyref="website-docker-hub">Docker Hub</xref>, which any one can use to make their
       containers available. When you attempt to run a container for the first time, Docker will
@@ -26,6 +37,59 @@
       used in the container. By default, Docker will look for a container with the tag "latest" but
       you can specify a tag when running or getting a container. For example, to use the 1.8.5 Open
       Toolkit you would specify the tag "1.8.5" as part of the <cmdname>docker run</cmdname>
-      command:<codeblock>$ docker run -it ditaot/dita-ot:1.8.5</codeblock></p>
+      command:<codeblock>$ docker run -it <b>ditaot/dita-ot:1.8.5</b>
+root@39245ead9d45:~/DITA-OT# </codeblock></p>
+    <p>The DITA Open Toolkit Docker image serves two main purposes:<ol id="ol_vvs_trp_x5">
+        <li>It provides a working Open Toolkit you can run against your DITA source just as you
+          would any Open Toolkit</li>
+        <li>It provides access ot the Open Toolkit files to other containers, such as continuous
+          integration (CI) servers like Jenkins and GitLab, that want to run the Open Toolkit, and
+          XML processors that need the Open Toolkit-managed entity resolution catalogs
+            (<filepath>catalog-dita.xml </filepath> in the Open Toolkit).</li>
+      </ol></p>
+    <p>Docker containers are defined using configuration files named <filepath>Dockerfile</filepath>
+      (by convention). A given Docker container is always based on another container, either one of
+      the Docker-provided base containers, which provide the base operating system for the
+      container, usually a minimal Linux environment, or a more specialized environment. For
+      example, the DITA Open Toolkit base container is itself based on the "java:8" container, since
+      the Open Toolkit is a Java-based application. By basing one container on another you can
+      quickly build up systems of containers with different configurations with a minimum of
+      duplication. Containers are stored as layered file systems and layers that are the same as
+      shared across containers, making it efficient to have different containers that have only
+      small differences from their base containers.</p>
+    <p>Docker containers can connect to the host operating system or Docker machine by defining
+        <term>volumes</term>. Volumes are directories within the container that can be connected to
+      host machine or Docker machine directories. Managing volumes and understanding how your local
+      machine's directory structure relates to a given Docker container's volumes is probably the
+      most complicated aspect of using Docker containers.</p>
+    <p>Docker containers are intended to be effemeral, meaning that they can be created and
+      destroyed, started and stopped quickly. As such they do not provide any built-in persistent
+      storage. When a container stops or is removed any changes made within the container are lost.
+      So it is important to understand how to capture anything you want to keep, such as the output
+      of the DITA Open Toolkit. This document tries to describe the processes and practices for
+      doing this on Windows and OS X.</p>
+    <p>To use Docker on Windows and OS X you must install the Docker Toolkit, which provides the
+      various Docker commands and the default VirtualBox Docker engine. You can also install
+      VirtualBox separately if you want (it provides a nice user interface for accessing the virtual
+      machine itself as an alternative to the Docker <cmdname>docker-machine ssh</cmdname>
+      command).</p>
+    <p>Under OS X you may need to manually set up the Docker environment in new terminal windows, or
+      update the Docker environment variables if you restart the Docker machine. You can do this
+      with the command <codeph>eval $(docker-machine env
+      default)</codeph>:<codeblock>$ echo $DOCKER_HOST
+
+$ eval $(docker-machine env default)
+$ echo $DOCKER_HOST
+tcp://192.168.99.100:2376
+$ _</codeblock></p>
+    <p>On Windows you use a Docker-provided Docker Quickstart Terminal, which is a minimal
+      unix-style terminal window preconfigured for Docker use, so you shouldn't need to worry about
+      the environment.</p>
+    <p>You need to know the IP address of the Docker host as that is the IP address you use to
+      connect to servers running in a Docker container under Windows and OS X. This not an issue for
+      the Open Toolkit but is for any Docker container that provides some kind of Web server. For
+      example, you might use an nginx or Apache Tomcat server to serve HTML generated by the Open
+      Toolkit. In that case, you would use the Docker host IP address and the port configured for
+      the server, e.g. "http://192.168.99.100:8080".</p>
  </conbody>
 </concept>

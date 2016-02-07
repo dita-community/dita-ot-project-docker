@@ -16,5 +16,8 @@
         keyref="website-dita-community-dita-ot-docker">DITA Community</xref> and <xref
         keyref="website-d4p-dita-ot-docker">DITA for Publishers</xref> Docker container
       projects.</p>
+    <p>This guide is written primarily for users on Windows or OS X. If you are using these
+      containers in a Linux environment things are a little easier and you probably already know
+      most of what you need to know. The instructions assume you are using a Docker machine.</p>
  </conbody>
 </concept>
