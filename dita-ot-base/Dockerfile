@@ -1,7 +1,7 @@
 FROM java:8
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 # Make directories for later use
-ENV OT_VERSION 2.2.2
+ENV OT_VERSION 2.2.3
 LABEL ot-version ${OT_VERSION}
 ENV CATALOG_DIR /opt/dita-ot/catalogs
 RUN mkdir -p /opt/dita-ot/catalogs
