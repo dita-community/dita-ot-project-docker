@@ -49,3 +49,5 @@ This clone will be the target of the output
   Where "/Users/ekimber/workspace-dita-community" is the directory you have both clones of the project. 
   This directory must be under the /Users directory.
 3. Check the generated HTML in the gh-pages clone. If it's good, commit and push.
+
+
