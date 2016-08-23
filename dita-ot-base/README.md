@@ -12,6 +12,6 @@ dfst/dita-ot image:
 
 ~~~~
 VOLUME /opt/dita-ot/DITA-OT
-VOLUME /opt/dita-ot/userdata
+VOLUME /opt/dita-ot/data
 ~~~~
  

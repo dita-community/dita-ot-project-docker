@@ -23,15 +23,13 @@ set in the Dockerfile).
 The base container defines two volumes intended to be mount points
 for host directories:
 
-- VOLUME /opt/dita-ot/data - Mount directory containing the source data to process. Because of permissions complexities under 
-Windows and OS X this is effectively a read-only directory.
-- VOLUME /opt/dita-ot/out - Mount directory to hold output. This directory must be writable by the OT process, 
-so under Windows and OS X this may need to be a directory in the Docker machine running the container,
-e.g., /srv/dita-ot/out. You can access this directory in various ways, including using secure copy (scp) or
-rsync from the docker machine. 
+- VOLUME /opt/dita-ot/data - Mount directory containing the source data to process.
+- VOLUME /opt/dita-ot/out - Mount directory to hold output. This directory must be writable by the OT process. If you are using Docker for Mac or Docker for Windows, any directory under /Users should be
+fine.
 
 In addition, working DITA OT containers should define the volume /opt/dita-ot/DITA-OT, which makes
-the DITA OT itself available to other containers via the --volumes-from Docker runtime parameter.
+the DITA OT itself available to other containers via the --volumes-from Docker runtime parameter (for
+example, to access the OT-managed catalog-dita.xml master entity resolution catalog).
 
 To generate the HTML5 version of the project Web site, do the following:
 
