@@ -24,6 +24,7 @@ MAINTAINER Me Myself "me@example.com"
 # Add your additional stuff here
 #
 VOLUME /opt/dita-ot/DITA-OT
+VOLUME /opt/dita-ot/data
 CMD /bin/bash
 #
 # End of Dockerfile
@@ -88,7 +89,7 @@ CMD /bin/bash
         <parmname>-it</parmname> parameters the shell will run and then immediately exit. If you
       specify the <parmname>-it</parmname> parameters to the <cmdname>docker run</cmdname> command
       then you will end up in a bash terminal window inside the container. If you specify a command
-      as a paremeter to the <cmdname>docker run</cmdname> command then it is run in place of the
+      as a parameter to the <cmdname>docker run</cmdname> command then it is run in place of the
       command defined on the <cmdname>CMD</cmdname> statement.</p>
     <p>It should be clear that you can quickly copy and paste the <cmdname>RUN wget</cmdname> lines
       to add whatever HTTP-accessible plugins you want.</p>
@@ -97,7 +98,7 @@ CMD /bin/bash
       However, if you need your container to work with both the 1.x and 2.x Open Toolkit versions
       you need to use the <cmdname>wget</cmdname> plus <filepath>integrator.xml</filepath>
       approach.</p>
-    <p>To use plugins that are on your local machine you can use the the Dockerfile
+    <p>To use plugins that are on your local machine you can use the Dockerfile
         <cmdname>ADD</cmdname> statement, which copies files from the host machine into the
       container. The main requirement is that the files to be added must be in or under the
       directory that contains the <filepath>Dockerfile</filepath> file:</p>
@@ -109,7 +110,7 @@ MAINTAINER Me Myself "me@example.com"
 WORKDIR ${DITA_HOME}
 ENV DITA_COMM_URL=https://github.com/dita-community/ BRANCH=develop
 #
-# Get plugin from DITA Community project:
+# Add my plugin:
 ADD plugins/org.example.myhtml/ .
 #
 # Integrate new plugins
@@ -128,7 +129,7 @@ $ ls
 Dockerfile
 plugins/
 $ <b>docker build .</b>
-… {lots of messages} ...
+ {lots of messages} ...
 Removing intermediate container 5185b8770fc4
 Successfully built 3df126334196
 $ _</codeblock></p>
@@ -159,7 +160,7 @@ root@a90236ed0684:~/DITA-OT# _</codeblock></p>
     <p>To give the image a name, use the <parmname>-t</parmname> (tag) parameter of the
         <cmdname>docker build</cmdname>
       command:<codeblock>$ docker build -t me/dita-ot .
-… {lots of messages, but fewer than before 
+ {lots of messages, but fewer than before 
   if there was no change to the Dockerfile}...
 $ docker images
 docker images

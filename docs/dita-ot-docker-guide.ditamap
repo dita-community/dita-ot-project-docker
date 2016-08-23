@@ -5,7 +5,8 @@
   <topicmeta>
     <critdates>
       <created date="2016-02-06"/>
-      <revised modified="2016-02-07"/>
+      <revised
+        modified="2016-08-23"/>
     </critdates>
   </topicmeta>
   <topicgroup>
@@ -62,7 +63,7 @@
     </keydef>
   </topicgroup>
   <topicref href="topics/dita-ot-docker-guide.dita" keys="dita-ot-docker-container-guide">
-    <topicref href="topics/about_docker.dita"/>
+    <topicref href="topics/about_docker.dita" keys="about_docker"/>
     <topicref href="topics/running_the_open_toolkit.dita" keys="running-the-ot"/>
     <topicref href="topics/creating-custom-dita-ot-containers.dita"
       keys="creating-custom-dita-ot-containers"/>
