@@ -11,6 +11,6 @@ container:
 
 - /opt/dita-ot/DITA-OT is the full DITA-OT itself
 
-NOTE: Use the image dfst/dita-ot-base as the extension base for new DITA-OT images.
+NOTE: Use the image ditaot/dita-ot-base as the extension base for new DITA-OT images.
 This image will not work because the volume definitions in this image prevent other images
 based on it from persisting anything to the OT. 

@@ -19,5 +19,16 @@
     <p>This guide is written primarily for users on Windows or OS X. If you are using these
       containers in a Linux environment things are a little easier and you probably already know
       most of what you need to know. The instructions assume you are using a Docker machine.</p>
+    <note>As of August 2016 the Docker for Windows and Docker for Mac versions of Docker make using
+      Docker under Windows and OSX about as easy as it is under Linux. If you have been using the
+      older Docker Machine version of Docker under Windows or OSX, it is strongly recommended that
+      you upgrade to the newer Docker for Windows or Docker for Mac. See <xref
+        keyref="website-docker"/> for installers.</note>
+    <note>Docker for Windows requires the 64-bit version of Windows 10 Pro, Enterprise, or Education
+      (1511 November update, Build 10586 or later) and Microsoft Hyper-V. <p>If you are stuck on an
+        older version of Windows you will need to use the Docker Machine, which also requires 64-bit
+        operating systems. Docker Machine uses a separate virtual machine to run the Docker
+        containers, which makes setting things up slightly more complicated but still
+      doable.</p></note>
  </conbody>
 </concept>
