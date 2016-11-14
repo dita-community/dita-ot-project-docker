@@ -19,7 +19,7 @@
       command:<codeblock>$ docker run -v /Users/ekimber/workspace:/opt/dita-ot/data ditaot/dita-ot \
   dita -i /opt/dita-ot/data/pub-01/pub-01.ditamap \
   -f html5 \
-  -o /opt/data-ot/data/pub-01/out/html5</codeblock></p>
+  -o /opt/dita-ot/data/pub-01/out/html5</codeblock></p>
     <p>Under Windows you use <filepath>/c/Users/...</filepath> (assuming your Users directory is on
       the <filepath>c:</filepath>
       drive):<codeblock>C:\Users\ekimber>docker run <b>/c/Users</b>/ekimber/workspace:/opt/dita-ot/data ditaot/dita-ot \
