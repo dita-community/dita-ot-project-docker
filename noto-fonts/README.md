@@ -10,7 +10,7 @@ This container defines the following volumes:
 ~~~~
 VOLUME /usr/share/fonts
 VOLUME /opt/fop
-~~~~~
+~~~~
 
 /usr/share/fonts/noto contains all the Noto fonts, /opt/fop contains fop.xconf, which configures the
 font directory to FOP.
