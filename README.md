@@ -33,7 +33,7 @@ example, to access the OT-managed catalog-dita.xml master entity resolution cata
 
 To generate the HTML5 version of the project Web site, do the following:
 
-1. If you haven't ready, make a new clone of the project and check out branch "gh-pages". 
+1. If you haven't already, make a new clone of the project and check out branch "gh-pages". 
 This clone will be the target of the output
 2. Run the following Docker command (OS X version, for Windows add "/c" before "/Users" in the -v parameter):
   ```
@@ -44,6 +44,6 @@ This clone will be the target of the output
         -Dtranstype d4p-html5
   ```
 
-  Where "/Users/ekimber/workspace-dita-community" is the directory you have both clones of the project. 
+  Where "/Users/ekimber/workspace-dita-community" is the directory where you have both clones of the project. 
   This directory must be under the /Users directory.
 3. Check the generated HTML in the gh-pages clone. If it's good, commit and push.
